@@ -4,13 +4,14 @@ import pandas as pd
 #Introducir aquí la ruta del archivo cat entre comillas. NOTA: Las barras de la ruta deben ir duplicadas.
 # Ejemplo: C:\\Users\\fulanito\\Escritorio\\archivo.cat
 
-archivocat= "C:\Users\inilo\Documents\DOCTORADO\MADRID\CATASTRO\CAT\\28_900_U_2017-01-21.CAT"
+archivocat= "C:\Users\inilo\Desktop\\28_106_U_2016-09-24.CAT"
 
 ##########################################################################################################
 
 #Separación de registros##################################################################################
 
-df0 = pd.read_csv(archivocat, delimiter="··", header=None)
+print 'Leyendo CAT original...'
+df0 = pd.read_csv(archivocat, delimiter="··", header=None, encoding = 'cp1252')
 # df0 = pd.read_table(archivocat, delimiter=None, header=None) #Solución posible al error de los delimitadores regex. Menor velocidad
 df0['reg'] = df0[0].str.slice(0,2)
 df11 = df0[df0['reg']=='11']
@@ -25,7 +26,7 @@ df17 = df0[df0['reg']=='17']
 #Generación de atributos según esquema de Catastro ######################################################
 
 #Registro 11 Registro de Finca. Existe uno por cada parcela catastral####################################
-
+print 'Procesando Registro 11...'
 df11.is_copy = False
 df11['1_tipo_reg'] = 11
 df11['24_cd'] = df11[0].str.slice(24,26)
@@ -65,7 +66,7 @@ df11['602_n_bice'] = df11[0].str.slice(602,667)
 df11['667_srs'] = df11[0].str.slice(667,677)
 
 #Registro 13 Registro de Unidad Constructiva. Existe uno por cada unidad constructiva en cada parcela catastral########
-
+print 'Procesando Registro 13...'
 df13.is_copy = False
 df13['1_tipo_reg'] = 13
 df13['24_cd'] = df13[0].str.slice(24,26)
@@ -92,7 +93,7 @@ df13['26_cmc'] = df13[0].str.slice(308,313)
 df13['26_cmc'] = df13[0].str.slice(410,414)
 
 #Registro 14 Registro de Construcción. Existe uno por cada construcción de cada unidad constructiva en cada parcela catastral
-
+print 'Procesando Registro 14...'
 df14.is_copy = False
 df14['1_tipo_reg'] = 14
 df14['24_cd'] = df14[0].str.slice(24,26)
@@ -116,8 +117,9 @@ df14['98_sil'] = df14[0].str.slice(98,105)
 df14['105_tip'] = df14[0].str.slice(105,110)
 df14['112_modl'] = df14[0].str.slice(112,115)
 
-#Registro 15 Registro de Bien Inmueble. Existirá uno por cada bien inmueble en cada parcela catastral.
 
+#Registro 15 Registro de Bien Inmueble. Existirá uno por cada bien inmueble en cada parcela catastral.
+print 'Procesando Registro 15...'
 df15.is_copy = False
 df15['1_tipo_reg'] = 15
 df15['24_cd'] = df15[0].str.slice(24,26)
@@ -163,6 +165,37 @@ df15['428_grbice'] = df15[0].str.slice(428,429)
 df15['442_sfc'] = df15[0].str.slice(442,452)
 df15['452_sfs'] = df15[0].str.slice(452,462)
 df15['462_cpt'] = df15[0].str.slice(462,471)
+
+
+#Registro 16 Registro de reparto de elementos comunes
+print 'Procesando Registro 16...'
+df16.is_copy = False
+df16['1_tipo_reg'] = 16
+df16['24_cd'] = df16[0].str.slice(24,26)
+df16['26_cmc'] = df16[0].str.slice(26,29)
+df16['31_pc'] = df16[0].str.slice(31,45)
+df16['45_no'] = df16[0].str.slice(45,49)
+df16['49_ccs'] = df16[0].str.slice(49,51)
+df16['51_cc2'] = df16[0].str.slice(51,110) #NO SE CÓMO PARSEAR ESTE BLOQUE
+
+
+#Registro 17 Registro de cultivos agrarios
+print 'Procesando Registro 17...'
+df17.is_copy = False
+df17['1_tipo_reg'] = 17
+df17['24_cd'] = df17[0].str.slice(23,25)
+df17['26_cmc'] = df17[0].str.slice(25,28)
+df17['29_cn'] = df17[0].str.slice(28,30)
+df17['31_pc'] = df17[0].str.slice(30,44)
+df17['45_cspr'] = df17[0].str.slice(44,49)
+df17['51_nobf'] = df17[0].str.slice(50,54)
+df17['55_tspr'] = df17[0].str.slice(54,55)
+df17['56_ssp'] = df17[0].str.slice(55,65)
+df17['66_ccc'] = df17[0].str.slice(65,66)
+df17['68_dcc'] = df17[0].str.slice(67,107)
+df17['108_ip'] = df17[0].str.slice(107,109)
+df17['127_modl'] = df17[0].str.slice(109,127)
+
 
 # Generación de IDs  ##################################################################################
 
