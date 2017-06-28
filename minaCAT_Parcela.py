@@ -76,6 +76,8 @@ df14['BE_USO'] = df14[0].str.slice(70,73)
 
 df14['BF_SUPT'] = df14[0].str.slice(83,90)
 
+df14['BF_SUPNH'] = df[0].str.slice(90,97)
+
 df14['BG_TIPOL'] = df14[0].str.slice(104,109)
 
 #Registro 15 Registro de Bien Inmueble. Existirá uno por cada bien inmueble en cada parcela catastral.
