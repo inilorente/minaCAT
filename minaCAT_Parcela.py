@@ -40,11 +40,11 @@ df15 = df0[df0['reg']=='15']
 
 #Registro 11 Registro de Finca. Existe uno por cada parcela catastral####################################
 
-print 'Procesando Registro 11...'
+1print 'Procesando Registro 11...'
 
 df11.is_copy = False
 
-df11['AA_TREG'] = 11
+1df11['AA_TREG'] = 11
 
 df11['AB_PCAT'] = df11[0].str.slice(30,44)
 
@@ -76,7 +76,7 @@ df14['BE_USO'] = df14[0].str.slice(70,73)
 
 df14['BF_SUPT'] = df14[0].str.slice(83,90)
 
-df14['BF_SUPNH'] = df[0].str.slice(90,97)
+df14['BF_SUPNH'] = df14[0].str.slice(90,97)
 
 df14['BG_TIPOL'] = df14[0].str.slice(104,109)
 
